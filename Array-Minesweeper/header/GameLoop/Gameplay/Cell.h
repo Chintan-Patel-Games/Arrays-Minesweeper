@@ -7,9 +7,34 @@ using namespace UIElements;
 
 namespace Gameplay
 {
+    enum class CellState
+    {
+        HIDDEN,
+        OPEN,
+        FLAGGED,
+    };
+
+    enum class CellType
+    {
+        EMPTY,
+        ONE,
+        TWO,
+        THREE,
+        FOUR,
+        FIVE,
+        SIX,
+        SEVEN,
+        EIGHT,
+        MINE,
+    };
+
     class Cell
     {
     private:
+        // Cell data members
+        CellState current_cell_state;
+        CellType cell_type;
+
         sf::Vector2i position;
 
         const int tile_size = 128;
@@ -25,5 +50,12 @@ namespace Gameplay
         ~Cell() = default;
 
         void render(sf::RenderWindow& window);
+
+        //Getters, Setters
+        CellState getCellState() const;
+        void setCellState(CellState state);
+        CellType getCellType() const;
+        void setCellType(CellType type);
+        void setCellTexture();
     };
 }
