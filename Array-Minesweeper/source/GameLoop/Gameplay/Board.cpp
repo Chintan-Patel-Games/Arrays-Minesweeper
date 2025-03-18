@@ -29,7 +29,9 @@ namespace Gameplay
     {
         float cell_width = getCellWidthInBoard();
         float cell_height = getCellHeightInBoard();
-        cell = new Cell(cell_width, cell_height, sf::Vector2i(0, 0));
+
+        //Create a cell for each array index
+        for (int col = 0; col < numberOfColumns; ++col) { cell[col] = new Cell(cell_width, cell_height, sf::Vector2i(col, 0)); }
     }
 
     float Board::getCellWidthInBoard() const { return (boardWidth - horizontalCellPadding) / numberOfColumns; }
@@ -39,6 +41,9 @@ namespace Gameplay
     void Board::render(sf::RenderWindow& window)
     {
         window.draw(boardSprite);
-        cell->render(window);
+
+        //render array's elements one by one
+        for (int col = 0; col < numberOfColumns; ++col) { cell[col]->render(window);
+        }
     }
 }
