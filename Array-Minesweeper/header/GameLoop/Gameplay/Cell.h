@@ -36,6 +36,8 @@ namespace Gameplay
         CellType cell_type;
 
         sf::Vector2i position;
+        const float cell_top_offset = 274.f;
+        const float cell_left_offset = 583.f;
 
         const int tile_size = 128;
         const int slice_count = 12;
@@ -52,6 +54,7 @@ namespace Gameplay
         void render(sf::RenderWindow& window);
 
         //Getters, Setters
+        sf::Vector2f getCellScreenPosition() const;
         CellState getCellState() const;
         void setCellState(CellState state);
         CellType getCellType() const;
