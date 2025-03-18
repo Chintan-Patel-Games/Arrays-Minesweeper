@@ -54,6 +54,12 @@
     <ClCompile Include="source\GameLoop\Gameplay\GameplayManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\UI\UIElements\Button\Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\GameLoop\Gameplay\Cell.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header\Event\EventPollingManager.h">
@@ -82,6 +88,12 @@
     </ClInclude>
     <ClInclude Include="Board.h">
       <Filter>Header Files\GameLoop\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="header\UI\UIElements\Button\Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header\GameLoop\Gameplay\Cell.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
