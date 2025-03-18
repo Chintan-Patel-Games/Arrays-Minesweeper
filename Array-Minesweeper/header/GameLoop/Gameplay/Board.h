@@ -7,8 +7,6 @@ namespace Gameplay
     class Board
     {
     private:
-        Cell* cell;
-
         // Board Constants
         static const int numberOfRows = 9;
         static const int numberOfColumns = 9;
@@ -23,6 +21,8 @@ namespace Gameplay
         const std::string boardTexturePath = "assets/textures/board.png";
         sf::Texture boardTexture;
         sf::Sprite boardSprite;
+
+        Cell* cell[numberOfColumns];
 
         void initializeBoardImage();
         void initialize();

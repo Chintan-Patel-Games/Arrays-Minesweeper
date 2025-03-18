@@ -46,6 +46,7 @@ namespace Gameplay
         Button* cell_button;
 
         void initialize(float width, float height, sf::Vector2i position);
+        sf::Vector2f getCellScreenPosition(float width, float height) const;
 
     public:
         Cell(float width, float height, sf::Vector2i position);
@@ -54,7 +55,6 @@ namespace Gameplay
         void render(sf::RenderWindow& window);
 
         //Getters, Setters
-        sf::Vector2f getCellScreenPosition() const;
         CellState getCellState() const;
         void setCellState(CellState state);
         CellType getCellType() const;
