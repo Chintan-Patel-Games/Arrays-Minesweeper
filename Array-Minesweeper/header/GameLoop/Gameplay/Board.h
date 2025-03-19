@@ -75,6 +75,8 @@ namespace Gameplay
         void setBoardState(BoardState state);
         void onCellButtonClicked(sf::Vector2i cell_position, MouseButtonType mouse_button_type);
         void openCell(sf::Vector2i cell_position);
+        bool areAllCellsOpen();
+        void flagAllMines();
         void revealAllMines();
     };
 }

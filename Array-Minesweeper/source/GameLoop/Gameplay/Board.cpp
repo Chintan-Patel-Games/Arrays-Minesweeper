@@ -221,15 +221,48 @@ namespace Gameplay
 
     void Board::processMineCell(sf::Vector2i cell_position)
     {
-        gameplay_manager->setGameResult(GameResult::LOST);  // Game Over!
-        Sound::SoundManager::PlaySound(Sound::SoundType::EXPLOSION);
-        revealAllMines();                                   // Show all mines
+        gameplay_manager->setGameResult(GameResult::LOST); // Game Over!
     }
 
     void Board::toggleFlag(sf::Vector2i cell_position)
     {
         cell[cell_position.x][cell_position.y]->toggleFlag();
         flaggedCells += (cell[cell_position.x][cell_position.y]->getCellState() == CellState::FLAGGED) ? 1 : -1;
+    }
+
+    bool Board::areAllCellsOpen()
+    {
+        int total_cells = numberOfRows * numberOfColumns;
+        int open_cells = 0;
+
+        for (int row = 0; row < numberOfRows; ++row)
+        {
+            for (int col = 0; col < numberOfColumns; ++col)
+            {
+                if (cell[row][col]->getCellState() == CellState::OPEN &&
+                    cell[row][col]->getCellType() != CellType::MINE) 
+                {
+                    open_cells++;
+                }
+            }
+        }
+
+        return open_cells == (total_cells - minesCount);
+    }
+
+    void Board::flagAllMines()
+    {
+        for (int row = 0; row < numberOfRows; ++row)
+        {
+            for (int col = 0; col < numberOfColumns; ++col)
+            {
+                if (cell[row][col]->getCellType() == CellType::MINE &&
+                    cell[row][col]->getCellState() != CellState::FLAGGED)
+                {
+                    cell[row][col]->setCellState(CellState::FLAGGED);
+                }
+            }
+        }
     }
 
     void Board::revealAllMines()

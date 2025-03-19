@@ -1,4 +1,4 @@
-#include "../../header/GameLoop/Gameplay/GameplayManager.h"
+﻿#include "../../header/GameLoop/Gameplay/GameplayManager.h"
 #include "../../header/GameLoop/Gameplay/Board.h"
 #include <iostream>
 
@@ -33,6 +33,8 @@ namespace Gameplay
     {
         if (!hasGameEnded()) //Check if the game has ended
             handleGameplay(eventManager, window);
+        else if (board->getBoardState() != BoardState::COMPLETED)
+            processGameResult();  // Handle win/loss
     }
 
     void GameplayManager::render(sf::RenderWindow& window)
@@ -63,9 +65,45 @@ namespace Gameplay
     {
         updateRemainingTime();
         board->update(eventManager, window);
+        checkGameWin();  // See if player has won
     }
 
     bool GameplayManager::hasGameEnded() { return game_result != GameResult::NONE; }
 
+    void GameplayManager::checkGameWin()
+    {
+        if (board->areAllCellsOpen())
+            game_result = GameResult::WON;  // Victory!
+    }
+
     void GameplayManager::setGameResult(GameResult gameResult) { this->game_result = gameResult; }
+
+    void GameplayManager::processGameResult()
+    {
+        switch (game_result)
+        {
+        case GameResult::WON:
+            gameWon();    // Victory! 🎉
+            break;
+        case GameResult::LOST:
+            gameLost();   // Game Over! 💥
+            break;
+        default:
+            break;
+        }
+    }
+
+    void GameplayManager::gameWon()
+    {
+        Sound::SoundManager::PlaySound(Sound::SoundType::GAME_WON);  // Play victory sound
+        board->flagAllMines();  // Show all mines
+        board->setBoardState(BoardState::COMPLETED);  // Stop the game
+    }
+
+    void GameplayManager::gameLost()
+    {
+        Sound::SoundManager::PlaySound(Sound::SoundType::EXPLOSION);  // Boom!
+        board->setBoardState(BoardState::COMPLETED);  // Game over
+        board->revealAllMines();  // Show where the mines were
+    }
 }
