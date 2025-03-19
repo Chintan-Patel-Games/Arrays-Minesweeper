@@ -55,6 +55,13 @@ namespace Gameplay
 
     void Cell::open() { setCellState(CellState::OPEN); }
 
+    void Cell::toggleFlag() {
+        if (current_cell_state == CellState::HIDDEN)
+            setCellState(CellState::FLAGGED);
+        else if (current_cell_state == CellState::FLAGGED)
+            setCellState(CellState::HIDDEN);
+    }
+
     sf::Vector2i Cell::getCellPosition() { return position; }
 
     CellState Cell::getCellState() const { return current_cell_state; }

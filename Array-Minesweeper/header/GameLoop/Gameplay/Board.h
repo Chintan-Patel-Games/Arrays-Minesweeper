@@ -26,6 +26,8 @@ namespace Gameplay
         //Number of Mines
         static const int minesCount = 9;
 
+        int flaggedCells;
+
         const std::string boardTexturePath = "assets/textures/board.png";
         sf::Texture boardTexture;
         sf::Sprite boardSprite;
@@ -47,6 +49,8 @@ namespace Gameplay
         bool isValidCellPosition(sf::Vector2i cell_position);
 
         void initializeVariables();
+
+        void toggleFlag(sf::Vector2i cell_position);
 
     public:
         Board();
