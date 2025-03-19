@@ -59,6 +59,9 @@ namespace Gameplay
 		void update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void render(sf::RenderWindow& window);
 
+        bool canOpenCell() const;
+        void open();
+
         //Getters, Setters
         sf::Vector2i getCellPosition();
         CellState getCellState() const;
