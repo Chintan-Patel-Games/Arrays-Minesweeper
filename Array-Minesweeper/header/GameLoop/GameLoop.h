@@ -1,6 +1,7 @@
 #pragma once
 #include "../../header/GameWindow/GameWindowManager.h"
 #include "../../header/Event/EventPollingManager.h"
+#include "../../header/UI/MainMenu/MainMenuManager.h"
 #include "../../header/GameLoop/Gameplay/GameplayManager.h"
 #include "../../header/UI/SplashScreen/SplashScreenManager.h"
 
@@ -17,11 +18,13 @@ enum class GameState
     EXIT
 };
 
-class GameLoop {
+class GameLoop
+{
 private:
     GameWindowManager* window_manager;
     EventPollingManager* event_manager;
     sf::RenderWindow* game_window;
+	MainMenuManager* main_menu_manager;
     GameplayManager* gameplay_manager;
     SplashScreenManager* splash_screen_manager;
 
