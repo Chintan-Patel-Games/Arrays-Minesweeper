@@ -1,16 +1,45 @@
 #include "../../header/GameLoop/Gameplay/Cell.h"
+#include "../../header/GameLoop/Gameplay/Board.h"
 
 namespace Gameplay
 {
-	Cell::Cell(float width, float height, sf::Vector2i position) { initialize(width, height, position); }
+	Cell::Cell(float width, float height, sf::Vector2i position, Board* board) { initialize(width, height, position, board); }
 	
-    void Cell::initialize(float width, float height, sf::Vector2i position)
+    void Cell::initialize(float width, float height, sf::Vector2i position, Board* board)
     {
         this->position = position;
+        this->board = board;
         //Get cell position
         sf::Vector2f cellScreenPosition = getCellScreenPosition(width, height);
         cell_button = new Button(cell_texture_path, cellScreenPosition, width * slice_count, height);
         current_cell_state = CellState::HIDDEN;
+
+        registerCellButtonCallback();
+    }
+
+    sf::Vector2f Cell::getCellScreenPosition(float width, float height) const
+    {
+        float xScreenPosition = cell_left_offset + position.x * width;
+        float yScreenPosition = cell_top_offset + position.y * height;
+        return sf::Vector2f(xScreenPosition, yScreenPosition);
+    }
+
+    void Cell::registerCellButtonCallback()
+    {
+        cell_button->registerCallbackFunction([this](MouseButtonType button_type) {
+            cellButtonCallback(button_type);  // Call Cell's own callback logic
+            });
+    }
+    
+    void Cell::cellButtonCallback(MouseButtonType button_type)
+    {
+        board->onCellButtonClicked(getCellPosition(), button_type);
+    }
+
+    void Cell::update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
+    {
+        if (cell_button)
+            cell_button->handleButtonInteractions(eventManager, window);
     }
 
     void Cell::render(sf::RenderWindow& window)
@@ -22,12 +51,7 @@ namespace Gameplay
         if (cell_button) cell_button->render(window);
     }
 
-    sf::Vector2f Cell::getCellScreenPosition(float width, float height) const
-    {
-        float xScreenPosition = cell_left_offset + position.x * width;
-        float yScreenPosition = cell_top_offset + position.y * height;
-        return sf::Vector2f(xScreenPosition, yScreenPosition);
-    }
+    sf::Vector2i Cell::getCellPosition() { return position; }
 
     CellState Cell::getCellState() const { return current_cell_state; }
 

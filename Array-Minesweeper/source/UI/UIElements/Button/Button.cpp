@@ -20,6 +20,15 @@ namespace UIElements {
         buttonSprite.setScale(width / button_texture.getSize().x, height / button_texture.getSize().y);
     }
 
+    bool Button::isMouseOnSprite(Event::EventPollingManager& event_manager, const sf::RenderWindow& window)
+    {
+        //Get the position of the mouse
+        sf::Vector2i mouse_position = event_manager.getMousePosition();
+
+        //Check if the mouse’s position is present in the bounds of buttonSprite.
+        return buttonSprite.getGlobalBounds().contains(static_cast<float>(mouse_position.x), static_cast<float>(mouse_position.y));
+    }
+
     void Button::render(sf::RenderWindow& window) const { window.draw(buttonSprite); }
 
     void Button::setTextureRect(const sf::IntRect& rect)
@@ -27,4 +36,16 @@ namespace UIElements {
         //Set a rectangle on the texture
         buttonSprite.setTextureRect(rect);
     }
+
+    void Button::handleButtonInteractions(Event::EventPollingManager& event_manager, const sf::RenderWindow& window)
+    {
+        if (event_manager.pressedLeftMouseButton() && isMouseOnSprite(event_manager, window)) {
+            callback_function(MouseButtonType::LEFT_MOUSE_BUTTON);
+        }
+        else if (event_manager.pressedRightMouseButton() && isMouseOnSprite(event_manager, window)) {
+            callback_function(MouseButtonType::RIGHT_MOUSE_BUTTON);
+        }
+    }
+
+    void Button::registerCallbackFunction(CallbackFunction button_callback) { callback_function = button_callback; }
 }
