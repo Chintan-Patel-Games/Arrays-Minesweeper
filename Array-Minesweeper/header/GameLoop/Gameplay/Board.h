@@ -5,6 +5,13 @@
 
 namespace Gameplay
 {
+    enum class BoardState
+    {
+        FIRST_CELL,
+        PLAYING,
+        COMPLETED,
+    };
+
     class GameplayManager; //Forawrd Declaration
     class Board
     {
@@ -33,6 +40,7 @@ namespace Gameplay
         sf::Texture boardTexture;
         sf::Sprite boardSprite;
 
+        BoardState boardState;
         Cell* cell[numberOfRows][numberOfColumns];
         GameplayManager* gameplay_manager;
 
@@ -45,8 +53,9 @@ namespace Gameplay
         float getCellHeightInBoard() const;
 
         //Populating the Board
-        void populateBoard();
-        void populateMines();
+        void populateBoard(sf::Vector2i cell_position);
+        void populateMines(sf::Vector2i first_cell_position);
+        bool isInvalidMinePosition(sf::Vector2i first_cell_position, int x, int y);
         int countMinesAround(sf::Vector2i cell_position);
         void populateCells();
         bool isValidCellPosition(sf::Vector2i cell_position);
@@ -62,6 +71,8 @@ namespace Gameplay
         void update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void render(sf::RenderWindow& window);
 
+        BoardState getBoardState() const;
+        void setBoardState(BoardState state);
         void onCellButtonClicked(sf::Vector2i cell_position, MouseButtonType mouse_button_type);
         void openCell(sf::Vector2i cell_position);
         void revealAllMines();
