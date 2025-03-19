@@ -24,6 +24,11 @@ namespace Gameplay
 
     void GameplayManager::initializeVariables() { board = new Board(); }
 
+    void GameplayManager::update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
+    {
+        board->update(eventManager, window);
+    }
+
     void GameplayManager::render(sf::RenderWindow& window)
     {
         //Render the background

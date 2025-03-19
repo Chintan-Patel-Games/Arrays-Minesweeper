@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "../../header/UI/UIElements/Button/Button.h"
-#include "../../header/Event/EventPollingManager.h"
 
 using namespace UIElements;
 
@@ -28,12 +27,15 @@ namespace Gameplay
         MINE,
     };
 
+    class Board;
     class Cell
     {
     private:
         // Cell data members
         CellState current_cell_state;
         CellType cell_type;
+
+        Board* board;
 
         sf::Vector2i position;
         const float cell_top_offset = 274.f;
@@ -45,16 +47,20 @@ namespace Gameplay
 
         Button* cell_button;
 
-        void initialize(float width, float height, sf::Vector2i position);
+        void initialize(float width, float height, sf::Vector2i position, Board* board);
         sf::Vector2f getCellScreenPosition(float width, float height) const;
+        void registerCellButtonCallback();
+        void cellButtonCallback(MouseButtonType button_type);
 
     public:
-        Cell(float width, float height, sf::Vector2i position);
+        Cell(float width, float height, sf::Vector2i position, Board* board);
         ~Cell() = default;
 
+		void update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void render(sf::RenderWindow& window);
 
         //Getters, Setters
+        sf::Vector2i getCellPosition();
         CellState getCellState() const;
         void setCellState(CellState state);
         CellType getCellType() const;

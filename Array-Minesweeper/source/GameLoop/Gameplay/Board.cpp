@@ -40,7 +40,7 @@ namespace Gameplay
         //create cells for the cell[][] array
         for (int row = 0; row < numberOfRows; ++row)
             for (int col = 0; col < numberOfColumns; ++col)
-                cell[row][col] = new Cell(cell_width, cell_height, sf::Vector2i(row, col));
+                cell[row][col] = new Cell(cell_width, cell_height, sf::Vector2i(row, col), this);
     }
 
     void Board::populateBoard()
@@ -109,6 +109,13 @@ namespace Gameplay
 
     float Board::getCellHeightInBoard() const { return (boardHeight - verticalCellPadding) / numberOfRows; }
 
+    void Board::update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
+    {
+        for (int row = 0; row < numberOfRows; ++row)
+            for (int col = 0; col < numberOfColumns; ++col)
+                cell[row][col]->update(eventManager, window);
+    }
+
     void Board::render(sf::RenderWindow& window)
     {
         window.draw(boardSprite);
@@ -117,5 +124,15 @@ namespace Gameplay
         for (int row = 0; row < numberOfRows; ++row)
             for (int col = 0; col < numberOfColumns; ++col)
                 cell[row][col]->render(window);
+    }
+
+    void Board::onCellButtonClicked(sf::Vector2i cell_position, MouseButtonType mouse_button_type)
+    {
+        if (mouse_button_type == MouseButtonType::LEFT_MOUSE_BUTTON) {
+            // Left-click logic will be added in the next lesson
+        }
+        else if (mouse_button_type == MouseButtonType::RIGHT_MOUSE_BUTTON) {
+            // Right-click logic will be added in the next lesson
+        }
     }
 }
