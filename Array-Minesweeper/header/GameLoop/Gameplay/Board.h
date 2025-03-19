@@ -55,5 +55,6 @@ namespace Gameplay
         void render(sf::RenderWindow& window);
 
         void onCellButtonClicked(sf::Vector2i cell_position, MouseButtonType mouse_button_type);
+        void openCell(sf::Vector2i cell_position);
     };
 }
