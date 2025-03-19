@@ -276,4 +276,9 @@ namespace Gameplay
             }
         }
     }
+
+    int Board::getRemainingMinesCount() const
+    {
+        return minesCount - flaggedCells;  // Unflagged mines remaining
+    }
 }

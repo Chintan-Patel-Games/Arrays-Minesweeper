@@ -78,5 +78,6 @@ namespace Gameplay
         bool areAllCellsOpen();
         void flagAllMines();
         void revealAllMines();
+        int getRemainingMinesCount() const;
     };
 }

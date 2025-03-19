@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "../../header/GameLoop/Gameplay/Board.h"
 #include "../../../header/Time/TimeManager.h"
+#include "../../header/UI/GameplayUI/GameplayUI.h"
 
 namespace Gameplay
 {
@@ -27,6 +28,7 @@ namespace Gameplay
 
         Board* board;
         GameResult game_result;
+        UI::GameplayUI* gameplay_ui;
 
         void initialize();
         void initializeVariables();
@@ -35,6 +37,7 @@ namespace Gameplay
 
         void updateRemainingTime();
         void processTimeOver();
+        int getRemainingMinesCount() const;
 
         void handleGameplay(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void gameWon();
