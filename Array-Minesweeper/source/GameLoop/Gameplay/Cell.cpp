@@ -51,6 +51,12 @@ namespace Gameplay
         if (cell_button) cell_button->render(window);
     }
 
+    void Cell::reset()
+    {
+        current_cell_state = CellState::HIDDEN;  // Back to hidden
+        cell_type = CellType::EMPTY;            // Back to empty
+    }
+
     bool Cell::canOpenCell() const { return current_cell_state == CellState::HIDDEN; }
 
     void Cell::open() { setCellState(CellState::OPEN); }
