@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "../../header/GameLoop/Gameplay/Board.h"
+#include "../../../header/Time/TimeManager.h"
 
 namespace Gameplay
 {
@@ -20,6 +21,10 @@ namespace Gameplay
         sf::Sprite background_sprite;
         std::string background_texture_path = "assets/textures/minesweeper_bg.png";
 
+        const float max_level_duration = 150.0f;
+        const float game_over_time = 11.0f;
+        float remaining_time;
+
         Board* board;
         GameResult game_result;
 
@@ -27,6 +32,11 @@ namespace Gameplay
         void initializeVariables();
         void initializeBackgroundImage();
         bool hasGameEnded();
+
+        void updateRemainingTime();
+        void processTimeOver();
+
+        void handleGameplay(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
 
     public:
         GameplayManager();
