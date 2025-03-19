@@ -144,7 +144,61 @@ namespace Gameplay
     {
         if (!cell[cell_position.x][cell_position.y]->canOpenCell())
             return; // Can't open this cell!
-        cell[cell_position.x][cell_position.y]->open(); // Open it!
+
+        processCellType(cell_position);
+    }
+
+    void Board::processCellType(sf::Vector2i cell_position)
+    {
+        switch (cell[cell_position.x][cell_position.y]->getCellType())
+        {
+        case CellType::EMPTY:
+            processEmptyCell(cell_position);
+            break;
+        case CellType::MINE:
+            //Handling Mine cell in next lesson
+            break;
+        default:
+            cell[cell_position.x][cell_position.y]->open();
+            break;
+        }
+    }
+    
+    void Board::processEmptyCell(sf::Vector2i cell_position)
+    {
+        CellState cell_state = cell[cell_position.x][cell_position.y]->getCellState();
+
+        switch (cell_state)
+        {
+        case::Gameplay::CellState::OPEN:
+            return;  // Already open, stop here
+        default:
+            cell[cell_position.x][cell_position.y]->open();
+
+
+            // Check all 8 neighbors
+            for (int a = -1; a <= 1; ++a)
+            {
+                for (int b = -1; b <= 1; ++b)
+                {
+                    //Store neighbor cells position
+                    sf::Vector2i next_cell_position = sf::Vector2i(a + cell_position.x, b + cell_position.y);
+
+                    // Skip current cell and invalid positions
+                    if ((a == 0 && b == 0) || !isValidCellPosition(next_cell_position))
+                        continue;
+
+                    //Flagged Cell Case
+                    CellState next_cell_state = cell[next_cell_position.x][next_cell_position.y]->getCellState();
+
+                    if (next_cell_state == CellState::FLAGGED)
+                        toggleFlag(next_cell_position);
+
+                    //Open neighbor cell
+                    openCell(next_cell_position);  // Open neighbor
+                }
+            }
+        }
     }
 
     void Board::toggleFlag(sf::Vector2i cell_position)
