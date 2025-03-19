@@ -86,9 +86,6 @@
     <ClInclude Include="header\GameLoop\Gameplay\Gameplaymanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Board.h">
-      <Filter>Header Files\GameLoop\Gameplay</Filter>
-    </ClInclude>
     <ClInclude Include="header\UI\UIElements\Button\Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>

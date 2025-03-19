@@ -5,6 +5,7 @@
 
 namespace Gameplay
 {
+    class GameplayManager; //Forawrd Declaration
     class Board
     {
     private:
@@ -33,9 +34,11 @@ namespace Gameplay
         sf::Sprite boardSprite;
 
         Cell* cell[numberOfRows][numberOfColumns];
+        GameplayManager* gameplay_manager;
 
         void initializeBoardImage();
-        void initialize();
+        void initialize(GameplayManager* gameplay_manager);
+        void initializeVariables(GameplayManager* gameplay_manager);
         void createBoard();
 
         float getCellWidthInBoard() const;
@@ -48,19 +51,19 @@ namespace Gameplay
         void populateCells();
         bool isValidCellPosition(sf::Vector2i cell_position);
 
-        void initializeVariables();
-
         void toggleFlag(sf::Vector2i cell_position);
         void processCellType(sf::Vector2i cell_position);
         void processEmptyCell(sf::Vector2i cell_position);
+        void processMineCell(sf::Vector2i cell_position);
 
     public:
-        Board();
+        Board(GameplayManager* gameplayManager);
 
         void update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void render(sf::RenderWindow& window);
 
         void onCellButtonClicked(sf::Vector2i cell_position, MouseButtonType mouse_button_type);
         void openCell(sf::Vector2i cell_position);
+        void revealAllMines();
     };
 }

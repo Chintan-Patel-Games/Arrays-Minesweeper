@@ -1,14 +1,15 @@
 #include "../../header/GameLoop/Gameplay/Board.h"
+#include "../../header/GameLoop/Gameplay/GameplayManager.h"
 #include <iostream>
 
 namespace Gameplay
 {
-    Board::Board() { initialize(); }
+    Board::Board(GameplayManager* gameplayManager) { initialize(gameplayManager); }
 
-    void Board::initialize()
+    void Board::initialize(GameplayManager* gameplayManager)
     {
         initializeBoardImage();
-        initializeVariables(); //initialize random engine
+        initializeVariables(gameplayManager); //initialize random engine
         createBoard();
         populateBoard();
     }
@@ -27,8 +28,9 @@ namespace Gameplay
             boardHeight / boardTexture.getSize().y);
     }
 
-    void Board::initializeVariables()
+    void Board::initializeVariables(GameplayManager* gameplayManager)
     {
+        this->gameplay_manager = gameplayManager;
         randomEngine.seed(randomDevice()); //Function to initialize random engine
     }
 
@@ -156,7 +158,7 @@ namespace Gameplay
             processEmptyCell(cell_position);
             break;
         case CellType::MINE:
-            //Handling Mine cell in next lesson
+            processMineCell(cell_position);
             break;
         default:
             cell[cell_position.x][cell_position.y]->open();
@@ -201,9 +203,28 @@ namespace Gameplay
         }
     }
 
+    void Board::processMineCell(sf::Vector2i cell_position)
+    {
+        gameplay_manager->setGameResult(GameResult::LOST);  // Game Over!
+        Sound::SoundManager::PlaySound(Sound::SoundType::EXPLOSION);
+        revealAllMines();                                   // Show all mines
+    }
+
     void Board::toggleFlag(sf::Vector2i cell_position)
     {
         cell[cell_position.x][cell_position.y]->toggleFlag();
         flaggedCells += (cell[cell_position.x][cell_position.y]->getCellState() == CellState::FLAGGED) ? 1 : -1;
+    }
+
+    void Board::revealAllMines()
+    {
+        for (int row = 0; row < numberOfRows; row++)
+        {
+            for (int col = 0; col < numberOfColumns; col++)
+            {
+                if (cell[row][col]->getCellType() == CellType::MINE)
+                    cell[row][col]->setCellState(CellState::OPEN);  // Show the mines
+            }
+        }
     }
 }

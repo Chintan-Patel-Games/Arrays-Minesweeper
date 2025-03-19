@@ -4,6 +4,13 @@
 
 namespace Gameplay
 {
+    enum class GameResult
+    {
+        NONE,
+        WON,
+        LOST
+    };
+
     class GameplayManager
     {
     private:
@@ -14,10 +21,12 @@ namespace Gameplay
         std::string background_texture_path = "assets/textures/minesweeper_bg.png";
 
         Board* board;
+        GameResult game_result;
 
         void initialize();
         void initializeVariables();
         void initializeBackgroundImage();
+        bool hasGameEnded();
 
     public:
         GameplayManager();
@@ -25,5 +34,7 @@ namespace Gameplay
 
 		void update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void render(sf::RenderWindow& window);
+
+        void setGameResult(GameResult gameResult);
     };
 }
