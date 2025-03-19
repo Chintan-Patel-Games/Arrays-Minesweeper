@@ -71,6 +71,7 @@ namespace Gameplay
         void update(Event::EventPollingManager& eventManager, sf::RenderWindow& window);
         void render(sf::RenderWindow& window);
 
+        void reset();
         BoardState getBoardState() const;
         void setBoardState(BoardState state);
         void onCellButtonClicked(sf::Vector2i cell_position, MouseButtonType mouse_button_type);

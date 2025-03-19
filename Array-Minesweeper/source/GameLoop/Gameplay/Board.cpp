@@ -134,6 +134,16 @@ namespace Gameplay
                 cell[row][col]->render(window);
     }
 
+    void Board::reset()
+    {
+        for (int row = 0; row < numberOfRows; ++row)
+            for (int col = 0; col < numberOfColumns; ++col)
+                cell[row][col]->reset();  // Reset each cell
+
+        flaggedCells = 0;  // No flags placed
+        boardState = BoardState::FIRST_CELL;  // Ready for first click
+    }
+
     BoardState Board::getBoardState() const { return boardState; }
 
     void Board::setBoardState(BoardState state) { boardState = state; }
