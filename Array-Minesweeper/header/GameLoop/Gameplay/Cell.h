@@ -61,6 +61,7 @@ namespace Gameplay
 
         bool canOpenCell() const;
         void open();
+        void toggleFlag();
 
         //Getters, Setters
         sf::Vector2i getCellPosition();
