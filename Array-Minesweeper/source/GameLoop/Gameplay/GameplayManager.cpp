@@ -1,4 +1,5 @@
 #include "../../header/GameLoop/Gameplay/GameplayManager.h"
+#include "../../header/GameLoop/Gameplay/Board.h"
 #include <iostream>
 
 namespace Gameplay
@@ -22,11 +23,12 @@ namespace Gameplay
         background_sprite.setColor(sf::Color(255, 255, 255, background_alpha));
     }
 
-    void GameplayManager::initializeVariables() { board = new Board(); }
+    void GameplayManager::initializeVariables() { board = new Board(this); }
 
     void GameplayManager::update(Event::EventPollingManager& eventManager, sf::RenderWindow& window)
     {
-        board->update(eventManager, window);
+        if (!hasGameEnded()) //Check if the game has ended
+            board->update(eventManager, window);
     }
 
     void GameplayManager::render(sf::RenderWindow& window)
@@ -37,4 +39,8 @@ namespace Gameplay
         //Render the board
         board->render(window);
     }
+
+    bool GameplayManager::hasGameEnded() { return game_result != GameResult::NONE; }
+
+    void GameplayManager::setGameResult(GameResult gameResult) { this->game_result = gameResult; }
 }
