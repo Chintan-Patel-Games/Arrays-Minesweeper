@@ -1,6 +1,6 @@
 # Array-Minesweeper
 
-  A console-based implementation of the classic **Minesweeper** game using C++ and arrays. The game allows players to uncover cells and avoid hidden mines in a grid-based environment. This project showcases foundational knowledge of arrays, game logic, and basic C++ programming.
+A console-based implementation of the classic **Minesweeper** game using C++ and arrays. The game allows players to uncover cells and avoid hidden mines in a grid-based environment. This project showcases foundational knowledge of arrays, game logic, and basic C++ programming.
 
 ## 🎮 Gameplay Features
 
@@ -46,31 +46,24 @@
 ## 📚 Concepts Demonstrated
 
   - 2D Arrays and memory handling
-
   - Object-Oriented Programming (OOP)
-
   - Procedural game loop
-
   - Input handling and validation
-
   - Random number generation for mine placement
 
 ## 🧠 Future Improvements
 
   - Add difficulty levels (easy/medium/hard)
-
   - Timer and score tracking
-
   - Enhanced UI with colorized output
-
   - Save/load game states
   
 ## 🧑‍💻 Author
 
   **Chintan Patel**
-
+  
   💼 [LinkedIn](https://www.linkedin.com/in/chintanpatel024)
-
+  
   🎮 [itch.io](https://chintan-patel-games.itch.io)
-
+  
   🐙 [GitHub](https://github.com/Chintan-Patel-Games)
