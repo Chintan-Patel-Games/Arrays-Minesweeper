@@ -43,10 +43,6 @@
       ./Minesweeper
       ```
 
-## 📸 Screenshots
-
-
-
 ## 📚 Concepts Demonstrated
 
   - 2D Arrays and memory handling
@@ -68,13 +64,13 @@
   - Enhanced UI with colorized output
 
   - Save/load game states
-
+  
 ## 🧑‍💻 Author
 
-  Chintan Patel
-  
-  **[GitHub Profile](https://github.com/Chintan-Patel-Games)**
-  
-  **[LinkedIn Profile](https://www.linkedin.com/in/chintanpatel024)**
-  
-  **[Game Showcase Profile](https://chintan-patel-games.itch.io)**
+  **Chintan Patel**
+
+  💼 [LinkedIn](https://www.linkedin.com/in/chintanpatel024)
+
+  🎮 [itch.io](https://chintan-patel-games.itch.io)
+
+  🐙 [GitHub](https://github.com/Chintan-Patel-Games)
