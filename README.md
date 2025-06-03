@@ -4,7 +4,6 @@ A sfml-based game with the implementation of the classic **Minesweeper** game us
 
 ## 🎮 Gameplay Features
 
-  - Console-based interface
   - Grid-based Minesweeper board
   - Randomized mine placement
   - Win by revealing all safe cells
