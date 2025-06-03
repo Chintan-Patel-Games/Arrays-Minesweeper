@@ -1,6 +1,6 @@
 # Array-Minesweeper
 
-A console-based implementation of the classic **Minesweeper** game using C++ and arrays. The game allows players to uncover cells and avoid hidden mines in a grid-based environment. This project showcases foundational knowledge of arrays, game logic, and basic C++ programming.
+A sfml-based game with the implementation of the classic **Minesweeper** game using C++ and arrays. The game allows players to uncover cells and avoid hidden mines in a grid-based environment. This project showcases foundational knowledge of arrays, game logic, and basic C++ programming.
 
 ## 🎮 Gameplay Features
 
