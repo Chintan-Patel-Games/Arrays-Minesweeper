@@ -29,18 +29,8 @@ A sfml-based game with the implementation of the classic **Minesweeper** game us
        git clone https://github.com/Chintan-Patel-Games/Arrays-Minesweeper.git
        cd Arrays-Minesweeper
        ```
-     
-  2. Compile the code:
 
-      ```bash
-      g++ main.cpp Board.cpp Game.cpp -o Minesweeper
-      ```
-
-  3. Run the executable:
-
-      ```bash
-      ./Minesweeper
-      ```
+  2. Compile and run the code
 
 ## 📚 Concepts Demonstrated
 
